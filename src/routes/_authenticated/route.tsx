@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
-import { CalendarClock, Smartphone, Users, Workflow, LogOut, MessageCircle } from "lucide-react";
+import { CalendarClock, ListChecks, Smartphone, Users, Workflow, LogOut, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/_authenticated")({
 
 const links = [
   { to: "/agendamentos", label: "Agendamentos", icon: CalendarClock },
+  { to: "/envios", label: "Envios", icon: ListChecks },
   { to: "/chips", label: "Chips", icon: Smartphone },
   { to: "/destinos", label: "Destinos", icon: Users },
   { to: "/n8n", label: "Integração n8n", icon: Workflow },

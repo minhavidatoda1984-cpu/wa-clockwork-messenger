@@ -11,9 +11,11 @@ import {
   type Agendamento,
   descreverRepeticao,
   formatarDataHora,
+  resumirResposta,
   useAgendamentos,
   useChips,
   useDestinos,
+  useEnvios,
   useExcluir,
   useSalvar,
 } from "@/lib/data";
@@ -34,6 +36,7 @@ function AgendamentosPage() {
   const { data: ags = [], isLoading } = useAgendamentos();
   const { data: chips = [] } = useChips();
   const { data: destinos = [] } = useDestinos();
+  const { data: envios = [] } = useEnvios();
   const salvar = useSalvar("agendamentos");
   const excluir = useExcluir("agendamentos");
   const [filtroChip, setFiltroChip] = useState("todos");
@@ -42,6 +45,7 @@ function AgendamentosPage() {
 
   const chipNome = (id: string | null) => chips.find((c) => c.id === id)?.nome;
   const destino = (id: string | null) => destinos.find((d) => d.id === id);
+  const ultimoEnvio = (id: string) => envios.find((e) => e.agendamento_id === id);
 
   const lista = ags.filter(
     (a) =>
@@ -85,6 +89,7 @@ function AgendamentosPage() {
         <div className="space-y-3">
           {lista.map((a) => {
             const d = destino(a.destino_id);
+            const u = ultimoEnvio(a.id);
             return (
               <div key={a.id} className={`flex flex-col gap-4 rounded-xl border bg-card p-4 md:flex-row md:items-center ${a.ativo ? "" : "opacity-60"}`}>
                 <div className="min-w-0 flex-1">
@@ -92,6 +97,11 @@ function AgendamentosPage() {
                     <h3 className="font-semibold">{a.titulo || "Sem título"}</h3>
                     <Badge variant={a.ativo ? "success" : "muted"}>{a.ativo ? "Ativo" : "Pausado"}</Badge>
                     <Badge variant="outline">{descreverRepeticao(a)}</Badge>
+                    {u && (
+                      <Badge variant={u.sucesso ? "success" : "destructive"} title={resumirResposta(u)}>
+                        {u.sucesso ? "✔ Enviado" : "✖ Falhou, tentando de novo"}
+                      </Badge>
+                    )}
                   </div>
                   {a.usar_texto && a.texto && <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{a.texto}</p>}
                   <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">

@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAgendamentosRouteImport } from './routes/_authenticated/agendamentos'
 import { Route as AuthenticatedChipsRouteImport } from './routes/_authenticated/chips'
 import { Route as AuthenticatedDestinosRouteImport } from './routes/_authenticated/destinos'
+import { Route as AuthenticatedEnviosRouteImport } from './routes/_authenticated/envios'
 import { Route as AuthenticatedN8nRouteImport } from './routes/_authenticated/n8n'
 import { Route as ApiPublicN8nEnviadoRouteImport } from './routes/api/public/n8n/enviado'
 import { Route as ApiPublicN8nPendentesRouteImport } from './routes/api/public/n8n/pendentes'
@@ -49,6 +50,11 @@ const AuthenticatedDestinosRoute = AuthenticatedDestinosRouteImport.update({
   path: '/destinos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEnviosRoute = AuthenticatedEnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedN8nRoute = AuthenticatedN8nRouteImport.update({
   id: '/n8n',
   path: '/n8n',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/chips': typeof AuthenticatedChipsRoute
   '/destinos': typeof AuthenticatedDestinosRoute
+  '/envios': typeof AuthenticatedEnviosRoute
   '/n8n': typeof AuthenticatedN8nRoute
   '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
   '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/chips': typeof AuthenticatedChipsRoute
   '/destinos': typeof AuthenticatedDestinosRoute
+  '/envios': typeof AuthenticatedEnviosRoute
   '/n8n': typeof AuthenticatedN8nRoute
   '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
   '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/_authenticated/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/_authenticated/chips': typeof AuthenticatedChipsRoute
   '/_authenticated/destinos': typeof AuthenticatedDestinosRoute
+  '/_authenticated/envios': typeof AuthenticatedEnviosRoute
   '/_authenticated/n8n': typeof AuthenticatedN8nRoute
   '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
   '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/agendamentos'
     | '/chips'
     | '/destinos'
+    | '/envios'
     | '/n8n'
     | '/api/public/n8n/enviado'
     | '/api/public/n8n/pendentes'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/agendamentos'
     | '/chips'
     | '/destinos'
+    | '/envios'
     | '/n8n'
     | '/api/public/n8n/enviado'
     | '/api/public/n8n/pendentes'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/_authenticated/agendamentos'
     | '/_authenticated/chips'
     | '/_authenticated/destinos'
+    | '/_authenticated/envios'
     | '/_authenticated/n8n'
     | '/api/public/n8n/enviado'
     | '/api/public/n8n/pendentes'
@@ -183,6 +195,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDestinosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/envios': {
+      id: '/_authenticated/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof AuthenticatedEnviosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/n8n': {
       id: '/_authenticated/n8n'
       path: '/n8n'
@@ -211,6 +230,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgendamentosRoute: typeof AuthenticatedAgendamentosRoute
   AuthenticatedChipsRoute: typeof AuthenticatedChipsRoute
   AuthenticatedDestinosRoute: typeof AuthenticatedDestinosRoute
+  AuthenticatedEnviosRoute: typeof AuthenticatedEnviosRoute
   AuthenticatedN8nRoute: typeof AuthenticatedN8nRoute
 }
 
@@ -218,6 +238,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgendamentosRoute: AuthenticatedAgendamentosRoute,
   AuthenticatedChipsRoute: AuthenticatedChipsRoute,
   AuthenticatedDestinosRoute: AuthenticatedDestinosRoute,
+  AuthenticatedEnviosRoute: AuthenticatedEnviosRoute,
   AuthenticatedN8nRoute: AuthenticatedN8nRoute,
 }
 
