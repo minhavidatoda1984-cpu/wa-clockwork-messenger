@@ -50,7 +50,7 @@ export function useSalvar<N extends TableName>(tabela: N) {
     mutationFn: async (row: T[N]["Insert"] & { id?: string }) => {
       const { id, ...rest } = row;
       const q = id
-        ? supabase.from(tabela).update(rest as never).eq("id", id)
+        ? supabase.from(tabela).update(rest as never).eq("id" as never, id as never)
         : supabase.from(tabela).insert(rest as never);
       const { error } = await q;
       if (error) throw error;

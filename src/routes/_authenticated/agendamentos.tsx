@@ -123,7 +123,7 @@ function AgendamentosPage() {
             <DialogTitle>{editando ? "Editar agendamento" : "Novo agendamento"}</DialogTitle>
           </DialogHeader>
           {editando !== undefined && (
-            <AgendamentoForm key={editando?.id ?? "novo"} inicial={editando ?? undefined} onSalvo={() => setEditando(undefined)} />
+            <AgendamentoForm key={editando?.id ?? "novo"} {...(editando ? { inicial: editando } : {})} onSalvo={() => setEditando(undefined)} />
           )}
         </DialogContent>
       </Dialog>

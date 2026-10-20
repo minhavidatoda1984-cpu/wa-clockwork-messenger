@@ -45,7 +45,7 @@ export function AgendamentoForm({ inicial, onSalvo }: { inicial?: Agendamento; o
       inicial.usar_horario !== f.usar_horario;
     salvar.mutate(
       {
-        id: inicial?.id,
+        ...(inicial ? { id: inicial.id } : {}),
         titulo: f.titulo,
         usar_texto: f.usar_texto,
         texto: f.usar_texto ? f.texto : null,

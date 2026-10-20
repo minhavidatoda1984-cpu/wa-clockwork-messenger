@@ -36,7 +36,10 @@ function DestinosPage() {
     const rows = [];
     for (const l of linhas) {
       const [nome, id] = l.split(/[;,\t]/).map((s) => s?.trim());
-      if (!nome || !id) return toast.error(`Linha inválida: "${l}"`);
+      if (!nome || !id) {
+        toast.error(`Linha inválida: "${l}"`);
+        return;
+      }
       rows.push({ tipo, nome, identificador: tipo === "contato" ? id.replace(/\D/g, "") : id });
     }
     if (!rows.length) return;
