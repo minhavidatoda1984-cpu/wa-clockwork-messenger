@@ -131,6 +131,24 @@ export type Database = {
         }
         Relationships: []
       }
+      configuracoes: {
+        Row: {
+          id: number
+          n8n_token: string
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          n8n_token?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          n8n_token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       destinos: {
         Row: {
           created_at: string
