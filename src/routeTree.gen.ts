@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAgendamentosRouteImport } from './routes/_authenticated/agendamentos'
 import { Route as AuthenticatedChipsRouteImport } from './routes/_authenticated/chips'
 import { Route as AuthenticatedDestinosRouteImport } from './routes/_authenticated/destinos'
 
@@ -29,6 +30,12 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAgendamentosRoute =
+  AuthenticatedAgendamentosRouteImport.update({
+    id: '/agendamentos',
+    path: '/agendamentos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChipsRoute = AuthenticatedChipsRouteImport.update({
   id: '/chips',
   path: '/chips',
@@ -43,12 +50,14 @@ const AuthenticatedDestinosRoute = AuthenticatedDestinosRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/chips': typeof AuthenticatedChipsRoute
   '/destinos': typeof AuthenticatedDestinosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/chips': typeof AuthenticatedChipsRoute
   '/destinos': typeof AuthenticatedDestinosRoute
 }
@@ -57,19 +66,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/agendamentos': typeof AuthenticatedAgendamentosRoute
   '/_authenticated/chips': typeof AuthenticatedChipsRoute
   '/_authenticated/destinos': typeof AuthenticatedDestinosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/chips' | '/destinos'
+  fullPaths: '/' | '/auth' | '/agendamentos' | '/chips' | '/destinos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/chips' | '/destinos'
+  to: '/' | '/auth' | '/agendamentos' | '/chips' | '/destinos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/agendamentos'
     | '/_authenticated/chips'
     | '/_authenticated/destinos'
   fileRoutesById: FileRoutesById
@@ -103,6 +114,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agendamentos': {
+      id: '/_authenticated/agendamentos'
+      path: '/agendamentos'
+      fullPath: '/agendamentos'
+      preLoaderRoute: typeof AuthenticatedAgendamentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/chips': {
       id: '/_authenticated/chips'
       path: '/chips'
@@ -121,11 +139,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendamentosRoute: typeof AuthenticatedAgendamentosRoute
   AuthenticatedChipsRoute: typeof AuthenticatedChipsRoute
   AuthenticatedDestinosRoute: typeof AuthenticatedDestinosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendamentosRoute: AuthenticatedAgendamentosRoute,
   AuthenticatedChipsRoute: AuthenticatedChipsRoute,
   AuthenticatedDestinosRoute: AuthenticatedDestinosRoute,
 }
