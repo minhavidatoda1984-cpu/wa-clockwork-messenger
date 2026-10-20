@@ -46,8 +46,8 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
+  --font-sans: var(--app-font-sans);
+  --font-display: var(--app-font-display);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -69,8 +69,8 @@
 
 :root {
   --radius: 0.75rem;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --app-font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --app-font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --background: oklch(0.975 0.008 120);
   --foreground: oklch(0.22 0.03 160);
   --card: oklch(1 0 0);
@@ -117,10 +117,10 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: var(--app-font-sans);
   }
   h1, h2, h3 {
-    font-family: var(--font-display);
+    font-family: var(--app-font-display);
     letter-spacing: -0.02em;
   }
 }
