@@ -10,33 +10,133 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAgendamentosRouteImport } from './routes/_authenticated/agendamentos'
+import { Route as AuthenticatedChipsRouteImport } from './routes/_authenticated/chips'
+import { Route as AuthenticatedDestinosRouteImport } from './routes/_authenticated/destinos'
+import { Route as AuthenticatedN8nRouteImport } from './routes/_authenticated/n8n'
+import { Route as ApiPublicN8nEnviadoRouteImport } from './routes/api/public/n8n/enviado'
+import { Route as ApiPublicN8nPendentesRouteImport } from './routes/api/public/n8n/pendentes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAgendamentosRoute =
+  AuthenticatedAgendamentosRouteImport.update({
+    id: '/agendamentos',
+    path: '/agendamentos',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedChipsRoute = AuthenticatedChipsRouteImport.update({
+  id: '/chips',
+  path: '/chips',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDestinosRoute = AuthenticatedDestinosRouteImport.update({
+  id: '/destinos',
+  path: '/destinos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedN8nRoute = AuthenticatedN8nRouteImport.update({
+  id: '/n8n',
+  path: '/n8n',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiPublicN8nEnviadoRoute = ApiPublicN8nEnviadoRouteImport.update({
+  id: '/api/public/n8n/enviado',
+  path: '/api/public/n8n/enviado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicN8nPendentesRoute = ApiPublicN8nPendentesRouteImport.update({
+  id: '/api/public/n8n/pendentes',
+  path: '/api/public/n8n/pendentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/agendamentos': typeof AuthenticatedAgendamentosRoute
+  '/chips': typeof AuthenticatedChipsRoute
+  '/destinos': typeof AuthenticatedDestinosRoute
+  '/n8n': typeof AuthenticatedN8nRoute
+  '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
+  '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/agendamentos': typeof AuthenticatedAgendamentosRoute
+  '/chips': typeof AuthenticatedChipsRoute
+  '/destinos': typeof AuthenticatedDestinosRoute
+  '/n8n': typeof AuthenticatedN8nRoute
+  '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
+  '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/agendamentos': typeof AuthenticatedAgendamentosRoute
+  '/_authenticated/chips': typeof AuthenticatedChipsRoute
+  '/_authenticated/destinos': typeof AuthenticatedDestinosRoute
+  '/_authenticated/n8n': typeof AuthenticatedN8nRoute
+  '/api/public/n8n/enviado': typeof ApiPublicN8nEnviadoRoute
+  '/api/public/n8n/pendentes': typeof ApiPublicN8nPendentesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/agendamentos'
+    | '/chips'
+    | '/destinos'
+    | '/n8n'
+    | '/api/public/n8n/enviado'
+    | '/api/public/n8n/pendentes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/agendamentos'
+    | '/chips'
+    | '/destinos'
+    | '/n8n'
+    | '/api/public/n8n/enviado'
+    | '/api/public/n8n/pendentes'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/agendamentos'
+    | '/_authenticated/chips'
+    | '/_authenticated/destinos'
+    | '/_authenticated/n8n'
+    | '/api/public/n8n/enviado'
+    | '/api/public/n8n/pendentes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ApiPublicN8nEnviadoRoute: typeof ApiPublicN8nEnviadoRoute
+  ApiPublicN8nPendentesRoute: typeof ApiPublicN8nPendentesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +148,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/agendamentos': {
+      id: '/_authenticated/agendamentos'
+      path: '/agendamentos'
+      fullPath: '/agendamentos'
+      preLoaderRoute: typeof AuthenticatedAgendamentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chips': {
+      id: '/_authenticated/chips'
+      path: '/chips'
+      fullPath: '/chips'
+      preLoaderRoute: typeof AuthenticatedChipsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/destinos': {
+      id: '/_authenticated/destinos'
+      path: '/destinos'
+      fullPath: '/destinos'
+      preLoaderRoute: typeof AuthenticatedDestinosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/n8n': {
+      id: '/_authenticated/n8n'
+      path: '/n8n'
+      fullPath: '/n8n'
+      preLoaderRoute: typeof AuthenticatedN8nRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/n8n/enviado': {
+      id: '/api/public/n8n/enviado'
+      path: '/api/public/n8n/enviado'
+      fullPath: '/api/public/n8n/enviado'
+      preLoaderRoute: typeof ApiPublicN8nEnviadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/n8n/pendentes': {
+      id: '/api/public/n8n/pendentes'
+      path: '/api/public/n8n/pendentes'
+      fullPath: '/api/public/n8n/pendentes'
+      preLoaderRoute: typeof ApiPublicN8nPendentesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendamentosRoute: typeof AuthenticatedAgendamentosRoute
+  AuthenticatedChipsRoute: typeof AuthenticatedChipsRoute
+  AuthenticatedDestinosRoute: typeof AuthenticatedDestinosRoute
+  AuthenticatedN8nRoute: typeof AuthenticatedN8nRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendamentosRoute: AuthenticatedAgendamentosRoute,
+  AuthenticatedChipsRoute: AuthenticatedChipsRoute,
+  AuthenticatedDestinosRoute: AuthenticatedDestinosRoute,
+  AuthenticatedN8nRoute: AuthenticatedN8nRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ApiPublicN8nEnviadoRoute: ApiPublicN8nEnviadoRoute,
+  ApiPublicN8nPendentesRoute: ApiPublicN8nPendentesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
