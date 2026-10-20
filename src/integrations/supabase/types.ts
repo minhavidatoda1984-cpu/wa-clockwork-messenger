@@ -14,7 +14,179 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      agendamentos: {
+        Row: {
+          ativo: boolean
+          chip_id: string | null
+          created_at: string
+          data_inicio: string
+          destino_id: string | null
+          horario: string | null
+          id: string
+          intervalo_dias: number | null
+          proximo_envio: string | null
+          repeticao: string
+          texto: string | null
+          titulo: string
+          ultimo_envio: string | null
+          updated_at: string
+          usar_chip: boolean
+          usar_destino: boolean
+          usar_horario: boolean
+          usar_repeticao: boolean
+          usar_texto: boolean
+        }
+        Insert: {
+          ativo?: boolean
+          chip_id?: string | null
+          created_at?: string
+          data_inicio?: string
+          destino_id?: string | null
+          horario?: string | null
+          id?: string
+          intervalo_dias?: number | null
+          proximo_envio?: string | null
+          repeticao?: string
+          texto?: string | null
+          titulo?: string
+          ultimo_envio?: string | null
+          updated_at?: string
+          usar_chip?: boolean
+          usar_destino?: boolean
+          usar_horario?: boolean
+          usar_repeticao?: boolean
+          usar_texto?: boolean
+        }
+        Update: {
+          ativo?: boolean
+          chip_id?: string | null
+          created_at?: string
+          data_inicio?: string
+          destino_id?: string | null
+          horario?: string | null
+          id?: string
+          intervalo_dias?: number | null
+          proximo_envio?: string | null
+          repeticao?: string
+          texto?: string | null
+          titulo?: string
+          ultimo_envio?: string | null
+          updated_at?: string
+          usar_chip?: boolean
+          usar_destino?: boolean
+          usar_horario?: boolean
+          usar_repeticao?: boolean
+          usar_texto?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agendamentos_chip_id_fkey"
+            columns: ["chip_id"]
+            isOneToOne: false
+            referencedRelation: "chips"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agendamentos_destino_id_fkey"
+            columns: ["destino_id"]
+            isOneToOne: false
+            referencedRelation: "destinos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chips: {
+        Row: {
+          api_key: string | null
+          created_at: string
+          evolution_url: string
+          id: string
+          instancia: string
+          nome: string
+          numero: string
+          status: string
+          status_atualizado_em: string | null
+        }
+        Insert: {
+          api_key?: string | null
+          created_at?: string
+          evolution_url?: string
+          id?: string
+          instancia?: string
+          nome: string
+          numero?: string
+          status?: string
+          status_atualizado_em?: string | null
+        }
+        Update: {
+          api_key?: string | null
+          created_at?: string
+          evolution_url?: string
+          id?: string
+          instancia?: string
+          nome?: string
+          numero?: string
+          status?: string
+          status_atualizado_em?: string | null
+        }
+        Relationships: []
+      }
+      destinos: {
+        Row: {
+          created_at: string
+          id: string
+          identificador: string
+          nome: string
+          tipo: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          identificador: string
+          nome: string
+          tipo?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          identificador?: string
+          nome?: string
+          tipo?: string
+        }
+        Relationships: []
+      }
+      envios: {
+        Row: {
+          agendamento_id: string | null
+          enviado_em: string
+          id: string
+          resposta: string | null
+          sucesso: boolean
+        }
+        Insert: {
+          agendamento_id?: string | null
+          enviado_em?: string
+          id?: string
+          resposta?: string | null
+          sucesso?: boolean
+        }
+        Update: {
+          agendamento_id?: string | null
+          enviado_em?: string
+          id?: string
+          resposta?: string | null
+          sucesso?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "envios_agendamento_id_fkey"
+            columns: ["agendamento_id"]
+            isOneToOne: false
+            referencedRelation: "agendamentos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
