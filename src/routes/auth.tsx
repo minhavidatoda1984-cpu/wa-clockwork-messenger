@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,9 +56,7 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-sidebar px-4">
       <form onSubmit={enviar} className="w-full max-w-sm space-y-5 rounded-2xl bg-card p-8 shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <MessageCircle className="h-5 w-5" />
-          </div>
+          <img src="/logo.svg" alt="" className="h-10 w-10" />
           <div>
             <h1 className="text-xl font-bold">Disparador</h1>
             <p className="text-sm text-muted-foreground">

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
-import { CalendarClock, ListChecks, Smartphone, Users, Workflow, LogOut, MessageCircle } from "lucide-react";
+import { CalendarClock, ListChecks, Smartphone, Users, Workflow, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -24,9 +24,7 @@ function Layout() {
     <div className="flex min-h-screen flex-col md:flex-row">
       <aside className="flex shrink-0 flex-col bg-sidebar text-sidebar-foreground md:w-60">
         <div className="flex items-center gap-2 px-5 py-5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-            <MessageCircle className="h-4 w-4" />
-          </div>
+          <img src="/logo.svg" alt="" className="h-8 w-8" />
           <span className="font-display text-lg font-bold">Disparador</span>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-1 md:flex-col">
